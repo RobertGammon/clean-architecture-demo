@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using CleanArchitecture.Application.Interfaces;
+﻿using System.Data.Entity;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Domain.Customers;
 using CleanArchitecture.Domain.Employees;
 using CleanArchitecture.Domain.Products;
@@ -11,7 +9,6 @@ using CleanArchitecture.Persistence.Customers;
 using CleanArchitecture.Persistence.Employees;
 using CleanArchitecture.Persistence.Products;
 using CleanArchitecture.Persistence.Sales;
-
 
 namespace CleanArchitecture.Persistence
 {
@@ -32,7 +29,7 @@ namespace CleanArchitecture.Persistence
 
         public void Save()
         {
-            this.SaveChanges();
+            SaveChanges();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

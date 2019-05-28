@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 
 namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
 {
-    public class GetCustomersListQuery 
+    public class GetCustomersListQuery
         : IGetCustomersListQuery
     {
         private readonly IDatabaseService _database;
@@ -18,11 +18,12 @@ namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
         public List<CustomerModel> Execute()
         {
             var customers = _database.Customers
-                .Select(p => new CustomerModel()
-                {
-                    Id = p.Id, 
-                    Name = p.Name
-                });
+                .Select(
+                    p => new CustomerModel
+                    {
+                        Id = p.Id,
+                        Name = p.Name
+                    });
 
             return customers.ToList();
         }

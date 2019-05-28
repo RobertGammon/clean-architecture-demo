@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+
 using AutoMoq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Common.Mocks;
 using CleanArchitecture.Domain.Products;
+
 using NUnit.Framework;
 
 namespace CleanArchitecture.Application.Products.Queries.GetProductsList
@@ -14,10 +16,13 @@ namespace CleanArchitecture.Application.Products.Queries.GetProductsList
     public class GetProductsListQueryTests
     {
         private GetProductsListQuery _query;
+
         private AutoMoqer _mocker;
+
         private Product _product;
 
         private const int Id = 1;
+
         private const string Name = "Product 1";
 
         [SetUp]
@@ -25,7 +30,7 @@ namespace CleanArchitecture.Application.Products.Queries.GetProductsList
         {
             _mocker = new AutoMoqer();
 
-            _product = new Product()
+            _product = new Product
             {
                 Id = Id,
                 Name = Name

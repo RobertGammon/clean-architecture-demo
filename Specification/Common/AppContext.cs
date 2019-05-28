@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using AutoMoq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Common.Dates;
+
 using StructureMap;
 
 namespace CleanArchitecture.Specification.Common
@@ -11,9 +12,13 @@ namespace CleanArchitecture.Specification.Common
     public class AppContext
     {
         public AutoMoqer Mocker;
+
         public IContainer Container;
+
         public IDatabaseService DatabaseService;
+
         public IInventoryService InventoryService;
+
         public IDateService DateService;
 
         public AppContext()
@@ -47,7 +52,7 @@ namespace CleanArchitecture.Specification.Common
 
         private void SetUpMockInventoryClient()
         {
-            InventoryService =  Mocker.GetMock<IInventoryService>().Object;
+            InventoryService = Mocker.GetMock<IInventoryService>().Object;
         }
 
         private void SetUpMockDateService()

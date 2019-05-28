@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CleanArchitecture.Application.Interfaces;
+﻿using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Infrastructure.Network;
 
 namespace CleanArchitecture.Infrastructure.Inventory
 {
-    public class InventoryService 
+    public class InventoryService
         : IInventoryService
     {
         // Note: these are hard coded to keep the demo simple
         private const string AddressTemplate = "http://abc123.com/inventory/products/{0}/notifysaleoccured/";
+
         private const string JsonTemplate = "{{\"quantity\": {0}}}";
 
         private readonly IWebClientWrapper _client;

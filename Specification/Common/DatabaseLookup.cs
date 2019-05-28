@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CleanArchitecture.Application.Interfaces;
+﻿using System.Linq;
+
+using CleanArchitecture.Application.Contracts;
 
 namespace CleanArchitecture.Specification.Common
 {

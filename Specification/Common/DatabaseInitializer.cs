@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Domain.Customers;
 using CleanArchitecture.Domain.Employees;
 using CleanArchitecture.Domain.Products;
 using CleanArchitecture.Domain.Sales;
+
 using Moq;
 
 namespace CleanArchitecture.Specification.Common
@@ -14,7 +15,7 @@ namespace CleanArchitecture.Specification.Common
     public class DatabaseInitializer
     {
         private readonly Mock<IDatabaseService> _mockDatabase;
-        
+
         public DatabaseInitializer(Mock<IDatabaseService> mockDatabase)
         {
             _mockDatabase = mockDatabase;
@@ -45,7 +46,7 @@ namespace CleanArchitecture.Specification.Common
                 .Returns(customers);
         }
 
-        private void CreateCustomer(IDbSet<Customer> customers, int id, string name)
+        private static void CreateCustomer(IDbSet<Customer> customers, int id, string name)
         {
             var customer = new Customer
             {
@@ -70,7 +71,7 @@ namespace CleanArchitecture.Specification.Common
                 .Returns(employees);
         }
 
-        private void CreateEmployee(IDbSet<Employee> employees , int id, string name)
+        private static void CreateEmployee(IDbSet<Employee> employees, int id, string name)
         {
             var employee = new Employee
             {
@@ -95,7 +96,7 @@ namespace CleanArchitecture.Specification.Common
                 .Returns(products);
         }
 
-        private void CreateProduct(IDbSet<Product> products, int id, string name, decimal price)
+        private static void CreateProduct(IDbSet<Product> products, int id, string name, decimal price)
         {
             var product = new Product
             {
@@ -125,12 +126,11 @@ namespace CleanArchitecture.Specification.Common
             IDbSet<Sale> sales,
             int id,
             int dateOffset,
-            int customerId, 
-            int employeeId, 
+            int customerId,
+            int employeeId,
             int productId,
             int quantity)
         {
-
             var date = new DateTime(2001, 2, 3);
 
             var customer = _mockDatabase.Object.Customers
@@ -142,7 +142,7 @@ namespace CleanArchitecture.Specification.Common
             var product = _mockDatabase.Object.Products
                 .Single(p => p.Id == productId);
 
-            var sale = new Sale()
+            var sale = new Sale
             {
                 Id = id,
                 Date = date.AddDays(dateOffset),

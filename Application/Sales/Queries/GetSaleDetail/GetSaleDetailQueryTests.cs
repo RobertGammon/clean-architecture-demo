@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
+
 using AutoMoq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Common.Mocks;
 using CleanArchitecture.Domain.Customers;
 using CleanArchitecture.Domain.Employees;
 using CleanArchitecture.Domain.Products;
 using CleanArchitecture.Domain.Sales;
+
 using NUnit.Framework;
 
 namespace CleanArchitecture.Application.Sales.Queries.GetSaleDetail
@@ -17,16 +19,25 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSaleDetail
     public class GetSaleDetailQueryTests
     {
         private GetSaleDetailQuery _query;
+
         private AutoMoqer _mocker;
+
         private Sale _sale;
 
         private const int SaleId = 1;
+
         private static readonly DateTime Date = new DateTime(2001, 2, 3);
+
         private const string CustomerName = "Customer 1";
+
         private const string EmployeeName = "Employee 1";
+
         private const string ProductName = "Product 1";
+
         private const decimal UnitPrice = 1.23m;
+
         private const int Quantity = 2;
+
         private const decimal TotalPrice = 2.46m;
 
         [SetUp]
@@ -47,7 +58,7 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSaleDetail
                 Name = ProductName
             };
 
-            _sale = new Sale()
+            _sale = new Sale
             {
                 Id = SaleId,
                 Date = Date,
@@ -67,7 +78,7 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSaleDetail
         public void TestExecuteShouldReturnSaleDetail()
         {
             _mocker.GetMock<IDbSet<Sale>>()
-                .SetUpDbSet(new List<Sale> {_sale });
+                .SetUpDbSet(new List<Sale> { _sale });
 
             _mocker.GetMock<IDatabaseService>()
                 .Setup(p => p.Sales)
@@ -75,28 +86,36 @@ namespace CleanArchitecture.Application.Sales.Queries.GetSaleDetail
 
             var result = _query.Execute(SaleId);
 
-            Assert.That(result.Id, 
+            Assert.That(
+                result.Id,
                 Is.EqualTo(SaleId));
 
-            Assert.That(result.Date, 
+            Assert.That(
+                result.Date,
                 Is.EqualTo(Date));
 
-            Assert.That(result.CustomerName, 
+            Assert.That(
+                result.CustomerName,
                 Is.EqualTo(CustomerName));
 
-            Assert.That(result.EmployeeName, 
+            Assert.That(
+                result.EmployeeName,
                 Is.EqualTo(EmployeeName));
 
-            Assert.That(result.ProductName, 
+            Assert.That(
+                result.ProductName,
                 Is.EqualTo(ProductName));
 
-            Assert.That(result.UnitPrice, 
+            Assert.That(
+                result.UnitPrice,
                 Is.EqualTo(UnitPrice));
 
-            Assert.That(result.Quantity, 
+            Assert.That(
+                result.Quantity,
                 Is.EqualTo(Quantity));
 
-            Assert.That(result.TotalPrice, 
+            Assert.That(
+                result.TotalPrice,
                 Is.EqualTo(TotalPrice));
         }
     }

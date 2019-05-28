@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+
 using AutoMoq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Common.Mocks;
 using CleanArchitecture.Domain.Customers;
+
 using NUnit.Framework;
 
 namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
@@ -14,10 +16,13 @@ namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
     public class GetCustomersListQueryTests
     {
         private GetCustomersListQuery _query;
+
         private AutoMoqer _mocker;
+
         private Customer _customer;
 
         private const int Id = 1;
+
         private const string Name = "Customer 1";
 
         [SetUp]
@@ -25,7 +30,7 @@ namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
         {
             _mocker = new AutoMoqer();
 
-            _customer = new Customer()
+            _customer = new Customer
             {
                 Id = Id,
                 Name = Name

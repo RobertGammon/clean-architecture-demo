@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+
 using AutoMoq;
-using CleanArchitecture.Application.Interfaces;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Common.Mocks;
 using CleanArchitecture.Domain.Employees;
+
 using NUnit.Framework;
 
 namespace CleanArchitecture.Application.Employees.Queries.GetEmployeesList
@@ -14,10 +16,13 @@ namespace CleanArchitecture.Application.Employees.Queries.GetEmployeesList
     public class GetEmployeesListQueryTests
     {
         private GetEmployeesListQuery _query;
+
         private AutoMoqer _mocker;
+
         private Employee _employee;
 
         private const int Id = 1;
+
         private const string Name = "Employee 1";
 
         [SetUp]
@@ -25,7 +30,7 @@ namespace CleanArchitecture.Application.Employees.Queries.GetEmployeesList
         {
             _mocker = new AutoMoqer();
 
-            _employee = new Employee()
+            _employee = new Employee
             {
                 Id = Id,
                 Name = Name

@@ -1,11 +1,14 @@
-﻿using System;
-using System.Linq;
-using CleanArchitecture.Application.Interfaces;
+﻿using System.Linq;
+
+using CleanArchitecture.Application.Contracts;
 using CleanArchitecture.Application.Sales.Commands.CreateSale;
 using CleanArchitecture.Common.Dates;
 using CleanArchitecture.Specification.Common;
+
 using Moq;
+
 using NUnit.Framework;
+
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -15,6 +18,7 @@ namespace CleanArchitecture.Specification.Sales.CreateASale
     public class CreateASaleSteps
     {
         private readonly AppContext _context;
+
         private CreateSaleModel _model;
 
         public CreateASaleSteps(AppContext context)
@@ -22,7 +26,7 @@ namespace CleanArchitecture.Specification.Sales.CreateASale
             _context = context;
         }
 
-        [Given(@"the following sale info:")]
+        [Given("the following sale info:")]
         public void GivenTheFollowingSaleInfo(Table table)
         {
             var saleInfo = table.CreateInstance<CreateSaleInfoModel>();
@@ -32,7 +36,7 @@ namespace CleanArchitecture.Specification.Sales.CreateASale
                 .Returns(saleInfo.Date);
 
             var mockDatabase = _context.Mocker.GetMock<IDatabaseService>();
-               
+
             var lookup = new DatabaseLookup(mockDatabase.Object);
 
             _model = new CreateSaleModel
@@ -43,8 +47,8 @@ namespace CleanArchitecture.Specification.Sales.CreateASale
                 Quantity = saleInfo.Quantity
             };
         }
-        
-        [When(@"I create a sale")]
+
+        [When("I create a sale")]
         public void WhenICreateASale()
         {
             var command = _context.Container
@@ -52,8 +56,8 @@ namespace CleanArchitecture.Specification.Sales.CreateASale
 
             command.Execute(_model);
         }
-        
-        [Then(@"the following sales record should be recorded:")]
+
+        [Then("the following sales record should be recorded:")]
         public void ThenTheFollowingSalesRecordShouldBeRecorded(Table table)
         {
             var saleRecord = table.CreateInstance<CreateSaleRecordModel>();
@@ -70,37 +74,45 @@ namespace CleanArchitecture.Specification.Sales.CreateASale
 
             var productId = lookup.GetProductIdByName(saleRecord.Product);
 
-            Assert.That(sale.Date, 
+            Assert.That(
+                sale.Date,
                 Is.EqualTo(saleRecord.Date));
 
-            Assert.That(sale.Customer.Id,
+            Assert.That(
+                sale.Customer.Id,
                 Is.EqualTo(customerId));
 
-            Assert.That(sale.Employee.Id, 
+            Assert.That(
+                sale.Employee.Id,
                 Is.EqualTo(employeeId));
 
-            Assert.That(sale.Product.Id,
+            Assert.That(
+                sale.Product.Id,
                 Is.EqualTo(productId));
 
-            Assert.That(sale.UnitPrice, 
+            Assert.That(
+                sale.UnitPrice,
                 Is.EqualTo(saleRecord.UnitPrice));
 
-            Assert.That(sale.Quantity,
+            Assert.That(
+                sale.Quantity,
                 Is.EqualTo(saleRecord.Quantity));
 
-            Assert.That(sale.TotalPrice,
+            Assert.That(
+                sale.TotalPrice,
                 Is.EqualTo(saleRecord.TotalPrice));
         }
 
-        [Then(@"the following sale-occurred notification should be sent to the inventory system:")]
+        [Then("the following sale-occurred notification should be sent to the inventory system:")]
         public void ThenTheFollowingNotificationThatASaleOccurredShouldBeSentToTheInventorySystem(Table table)
         {
             var notification = table.CreateInstance<CreateSaleOccurredNotificationModel>();
 
             var mockInventoryClient = _context.Mocker.GetMock<IInventoryService>();
 
-            mockInventoryClient.Verify(p => p.NotifySaleOcurred(
-                    notification.ProductId, 
+            mockInventoryClient.Verify(
+                p => p.NotifySaleOcurred(
+                    notification.ProductId,
                     notification.Quantity),
                 Times.Once);
         }

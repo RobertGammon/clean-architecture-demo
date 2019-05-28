@@ -89,8 +89,8 @@
     <Compile Include="Employees\Queries\GetEmployeesList\GetEmployeesListQueryTests.cs" />
     <Compile Include="Employees\Queries\GetEmployeesList\GetEmployeesQuery.cs" />
     <Compile Include="Employees\Queries\GetEmployeesList\IGetEmployeesListQuery.cs" />
-    <Compile Include="Interfaces\IDatabaseService.cs" />
-    <Compile Include="Interfaces\IInventoryService.cs" />
+    <Compile Include="Contracts\IDatabaseService.cs" />
+    <Compile Include="Contracts\IInventoryService.cs" />
     <Compile Include="Products\Queries\GetProductsList\GetProductsListQuery.cs" />
     <Compile Include="Products\Queries\GetProductsList\GetProductsListQueryTests.cs" />
     <Compile Include="Products\Queries\GetProductsList\IGetProductsListQuery.cs" />
@@ -112,11 +112,7 @@
     <Compile Include="Sales\Queries\GetSalesList\IGetSalesListQuery.cs" />
     <Compile Include="Sales\Queries\GetSalesList\SalesListItemModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Customers\Commands\" />
-    <Folder Include="Employees\Commands\" />
-    <Folder Include="Products\Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{d7ce4d23-9d31-4d46-a250-2a6fa76e6cea}</Project>
