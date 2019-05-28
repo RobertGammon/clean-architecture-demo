@@ -99,12 +99,14 @@
     <Compile Include="Common\DatabaseInitializer.cs" />
     <Compile Include="Common\DatabaseLookup.cs" />
     <Compile Include="Common\InMemoryDbSet.cs" />
+    <Compile Include="Domain\CustomerTests.cs" />
     <Compile Include="Customers\GetCustomersList\GetCustomersList.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetCustomersList.feature</DependentUpon>
     </Compile>
     <Compile Include="Customers\GetCustomersList\GetCustomersListSteps.cs" />
+    <Compile Include="Domain\EmployeeTests.cs" />
     <Compile Include="Employees\GetEmployeesList\GetEmployeesList.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,6 +119,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GetProductsList.feature</DependentUpon>
     </Compile>
+    <Compile Include="Domain\ProductTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales\CreateASale\CreateASale.feature.cs">
       <AutoGen>True</AutoGen>
@@ -141,6 +144,7 @@
     </Compile>
     <Compile Include="Sales\GetSalesList\GetSalesListModel.cs" />
     <Compile Include="Sales\GetSalesList\GetSalesListSteps.cs" />
+    <Compile Include="Domain\SaleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

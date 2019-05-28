@@ -1,24 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using CleanArchitecture.Domain.Customers;
 using CleanArchitecture.Domain.Employees;
 using CleanArchitecture.Domain.Products;
+using CleanArchitecture.Domain.Sales;
+
 using NUnit.Framework;
 
-namespace CleanArchitecture.Domain.Sales
+namespace CleanArchitecture.Specification.Domain
 {
     [TestFixture]
     public class SaleTests
     {
         private Sale _sale;
+
         private Customer _customer;
+
         private Employee _employee;
+
         private Product _product;
 
         private const int Id = 1;
+
         private static readonly DateTime Date = new DateTime(2001, 2, 3);
+
         private const decimal UnitPrice = 1.00m;
+
         private const int Quantity = 1;
 
         [SetUp]
@@ -38,7 +45,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.Id = Id;
 
-            Assert.That(_sale.Id,
+            Assert.That(
+                _sale.Id,
                 Is.EqualTo(Id));
         }
 
@@ -47,7 +55,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.Date = Date;
 
-            Assert.That(_sale.Date,
+            Assert.That(
+                _sale.Date,
                 Is.EqualTo(Date));
         }
 
@@ -56,7 +65,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.Customer = _customer;
 
-            Assert.That(_sale.Customer,
+            Assert.That(
+                _sale.Customer,
                 Is.EqualTo(_customer));
         }
 
@@ -65,7 +75,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.Employee = _employee;
 
-            Assert.That(_sale.Employee,
+            Assert.That(
+                _sale.Employee,
                 Is.EqualTo(_employee));
         }
 
@@ -74,7 +85,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.Product = _product;
 
-            Assert.That(_sale.Product,
+            Assert.That(
+                _sale.Product,
                 Is.EqualTo(_product));
         }
 
@@ -83,7 +95,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.UnitPrice = UnitPrice;
 
-            Assert.That(_sale.UnitPrice, 
+            Assert.That(
+                _sale.UnitPrice,
                 Is.EqualTo(UnitPrice));
         }
 
@@ -92,7 +105,8 @@ namespace CleanArchitecture.Domain.Sales
         {
             _sale.Quantity = Quantity;
 
-            Assert.That(_sale.Quantity,
+            Assert.That(
+                _sale.Quantity,
                 Is.EqualTo(Quantity));
         }
 
@@ -103,7 +117,8 @@ namespace CleanArchitecture.Domain.Sales
 
             _sale.UnitPrice = 1.23m;
 
-            Assert.That(_sale.TotalPrice, 
+            Assert.That(
+                _sale.TotalPrice,
                 Is.EqualTo(1.23m));
         }
 
@@ -114,7 +129,8 @@ namespace CleanArchitecture.Domain.Sales
 
             _sale.Quantity = 2;
 
-            Assert.That(_sale.TotalPrice, 
+            Assert.That(
+                _sale.TotalPrice,
                 Is.EqualTo(2.00m));
         }
     }

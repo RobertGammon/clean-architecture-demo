@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CleanArchitecture.Domain.Products;
+
 using NUnit.Framework;
 
-namespace CleanArchitecture.Domain.Products
+namespace CleanArchitecture.Specification.Domain
 {
     [TestFixture]
     public class ProductTests
     {
         private readonly Product _product;
-        private const int Id = 1;
-        private const string Name = "Test";
 
+        private const int Id = 1;
+
+        private const string Name = "Test";
 
         public ProductTests()
         {
@@ -25,7 +23,8 @@ namespace CleanArchitecture.Domain.Products
         {
             _product.Id = Id;
 
-            Assert.That(_product.Id,
+            Assert.That(
+                _product.Id,
                 Is.EqualTo(Id));
         }
 
@@ -34,7 +33,8 @@ namespace CleanArchitecture.Domain.Products
         {
             _product.Name = Name;
 
-            Assert.That(_product.Name,
+            Assert.That(
+                _product.Name,
                 Is.EqualTo(Name));
         }
     }
