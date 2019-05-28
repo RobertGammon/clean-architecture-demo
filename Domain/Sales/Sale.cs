@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using CleanArchitecture.Domain.Common;
 using CleanArchitecture.Domain.Customers;
 using CleanArchitecture.Domain.Employees;
@@ -10,7 +10,7 @@ namespace CleanArchitecture.Domain.Sales
     public class Sale : IEntity
     {
         private int _quantity;
-        private decimal _totalPrice;
+
         private decimal _unitPrice;
 
         public int Id { get; set; }
@@ -40,20 +40,16 @@ namespace CleanArchitecture.Domain.Sales
             set
             {
                 _quantity = value;
-                
+
                 UpdateTotalPrice();
             }
         }
 
-        public decimal TotalPrice
-        {
-            get { return _totalPrice; }
-            private set { _totalPrice = value; }
-        }
+        public decimal TotalPrice { get; private set; }
 
         private void UpdateTotalPrice()
         {
-            _totalPrice = _unitPrice * _quantity;
+            TotalPrice = _unitPrice * _quantity;
         }
     }
 }
