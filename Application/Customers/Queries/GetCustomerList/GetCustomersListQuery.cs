@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+
 using CleanArchitecture.Application.Interfaces.Persistence;
 
 namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
 {
-    public class GetCustomersListQuery 
+    public class GetCustomersListQuery
         : IGetCustomersListQuery
     {
         private readonly ICustomerRepository _repository;
@@ -15,14 +15,15 @@ namespace CleanArchitecture.Application.Customers.Queries.GetCustomerList
             _repository = repository;
         }
 
-        public List<CustomerModel> Execute()
+        public IList<CustomerModel> Execute()
         {
             var customers = _repository.GetAll()
-                .Select(p => new CustomerModel()
-                {
-                    Id = p.Id, 
-                    Name = p.Name
-                });
+                .Select(
+                    p => new CustomerModel
+                    {
+                        Id = p.Id,
+                        Name = p.Name
+                    });
 
             return customers.ToList();
         }
